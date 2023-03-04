@@ -23,7 +23,50 @@
 using namespace std;
 
 int guessNumber(int finalNumber, vector<string>& operations){
-    //TODO: Implement this function and return the required output
+    double output = finalNumber;
+
+    while (operations.size() > 0)
+    {
+        double operand2 = stoi(operations[operations.size() - 1].substr(4, operations[operations.size() - 1].length()));
+        ;
+        char operation = operations[operations.size() - 1][2];
+        switch (operation)
+        {
+        case '+':
+            output -= operand2;
+            break;
+        case '-':
+            output += operand2;
+            break;
+        case '*':
+            if (operand2 == 0)
+            {
+                return -2;
+            }
+            output /= operand2;
+            break;
+        case '/':
+            if (operand2 == 0)
+            {
+                return -1;
+            }
+            output *= operand2;
+            break;
+        case '^':
+            if (operand2 == 0)
+            {
+                return -2;
+            }
+            output = pow(output, 1.0 / operand2);
+            break;
+        case '%':
+            return -2; // since undoing modulo on a number results in more than one answer
+        default:
+            return -1; // invalid operation
+        }
+        operations.pop_back();
+    }
+    return output;
 }
 
 int main(){
