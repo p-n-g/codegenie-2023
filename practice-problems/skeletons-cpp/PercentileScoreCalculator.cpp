@@ -2,7 +2,15 @@
 using namespace std;
 
 float calculatePercentile(int totalStudent,vector<int>& marks,int yourScore){
-    //TODO: Implement this function and return the required output
+   int count = 0;
+    for(auto mark: marks){
+        if(mark < yourScore){
+            count++;
+        }
+    }
+    float ans = float(count)/totalStudent*100;
+    ans = int(ans*100 + 0.5);
+    return ans/100;
 }
 
 int main(){
